@@ -24,9 +24,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="kelas">Tanggal Lahir:</label>
-                    <input type="date" class="form-control" name="tanggal_lahir" value="<?= old('tanggal_lahir', $siswa['tanggal_lahir'] ?? '') ?>" required><br>
-
+                    <label for="tanggal_lahir">Tanggal Lahir</label>
+                    <input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir" required value="<?= old('tanggal_lahir') ? old('tanggal_lahir') : (isset($siswa['tanggal_lahir']) ? $siswa['tanggal_lahir'] : '') ?>">
                 </div>
 
 

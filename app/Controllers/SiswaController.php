@@ -32,6 +32,8 @@ class SiswaController extends Controller
         }
 
 
+        $tanggal_lahir = $this->request->getPost('tanggal_lahir'); // Mengambil input tanggal lahir
+        $formattedTanggal = date('Y-m-d', strtotime($tanggal_lahir)); // Format ulang menjadi Y-m-d
 
 
         // Cek apakah ada file foto yang diupload
@@ -45,14 +47,14 @@ class SiswaController extends Controller
             $fotoName = null;
         }
 
-        $tanggalLahir = $this->request->getPost('tanggal_lahir');
+
 
         // Simpan data siswa baru
         $this->siswaModel->insert([
             'nisn' => $this->request->getPost('nisn'),
             'nama_siswa' => $this->request->getPost('nama_siswa'),
             'kelas' => $this->request->getPost('kelas'),
-            'tanggal_lahir' => $this->request->getPost('tanggal_lahir'),
+            'tanggal_lahir' => $formattedTanggal,  // Simpan tanggal yang sudah diformat
             'jenis_kelamin' => $this->request->getPost('jenis_kelamin'),
             'alamat' => $this->request->getPost('alamat'),
             'foto_siswa' => $fotoName,
@@ -74,6 +76,9 @@ class SiswaController extends Controller
     // Memperbarui data siswa
     public function update($id)
     {
+        $tanggal_lahir = $this->request->getPost('tanggal_lahir'); // Mengambil input tanggal lahir
+        $formattedTanggal = date('d-m-Y', strtotime($tanggal_lahir)); // Format ulang menjadi Y-m-d
+
         // Ambil data siswa yang ada di database
         $siswaData = $this->siswaModel->find($id);
 
@@ -86,17 +91,16 @@ class SiswaController extends Controller
         } else {
             // Jika tidak ada foto, set nilai null atau default foto
             $fotoName = null;
-
-            $tanggalLahir = $this->request->getPost('tanggal_lahir');
         }
 
 
         // Update data siswa
         $this->siswaModel->update($id, [
+            'id' => $this->request->getPost('id'),
             'nisn' => $this->request->getPost('nisn'),
             'nama_siswa' => $this->request->getPost('nama_siswa'),
             'kelas' => $this->request->getPost('kelas'),
-            'tanggal_lahir' => $this->request->getPost('tanggal_lahir'),
+            'tanggal_lahir' => $formattedTanggal,  // Simpan tanggal yang sudah diformat
             'jenis_kelamin' => $this->request->getPost('jenis_kelamin'),
             'alamat' => $this->request->getPost('alamat'),
             'foto_siswa' => $fotoName,
@@ -128,14 +132,14 @@ class SiswaController extends Controller
         return redirect()->to('/siswa')->with('success', 'Data siswa berhasil dihapus');
     }
 
-    // Menampilkan daftar siswa dengan paginasi
+    // Menampilkan daftar siswa dengan paginasi 
     public function index()
     {
         // Mendapatkan query pencarian dari URL
         $search = $this->request->getGet('search');
 
         if ($search) {
-            $data['siswa'] = $this->siswaModel->like('nisn', $search)->orLike('nama_siswa', $search)->paginate(10);
+            $data['siswa'] = $this->siswaModel->like('nisn', $search)->orLike('nama_siswa', $search)->orLike('kelas', $search)->paginate(5, 'siswa');
         } else {
             $data['siswa'] = $this->siswaModel->paginate(10);
         }
@@ -160,3 +164,4 @@ class SiswaController extends Controller
         $dompdf->stream('Daftar_Siswa.pdf', ['Attachment' => true]);
     }
 }
+ // End of SiswaController class}

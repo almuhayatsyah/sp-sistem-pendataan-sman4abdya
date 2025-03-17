@@ -10,7 +10,9 @@
         Daftar Siswa Sman 4 Aceh Barat Daya
     </h1>
     <div>
-
+        <a href="<?= base_url('siswa/create') ?>" class="btn btn-primary mb-3">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Tambah Siswa</a>
         <a href="<?= base_url('siswa/export-pdf') ?>" class="btn btn-danger mb-3">
             <i class="fa fa-download" aria-hidden="true"></i>
             Download PDF</a>
@@ -31,11 +33,9 @@
 </div>
 
 <thead>
-    </ul>
-    </nav>
+
     <tr>
         <!-- <th>id</th> -->
-        <th>No</th>
         <th>NISN</th>
         <th>Nama</th>
         <th>Kelas</th>
@@ -43,7 +43,7 @@
         <th>Jenis Kelamin</th>
         <th>Alamat</th>
         <th>foto</th>
-        <th>Status KM</th>d
+        <th>Status KM</th>
         <th>Aksi</th>
     </tr>
 </thead>

@@ -22,8 +22,9 @@
 
                     <div class="form-group">
                         <label for="tanggal_lahir">Tanggal Lahir</label>
-                        <input type="date" class="form-control" name="tanggal_lahir" value="<?= old('tanggal_lahir', $siswa['tanggal_lahir'] ?? '') ?>" required><br>
+                        <input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir" required value="<?= old('tanggal_lahir') ? old('tanggal_lahir') : (isset($siswa['tanggal_lahir']) ? $siswa['tanggal_lahir'] : '') ?>">
                     </div>
+
 
                 </div>
                 <div class="form-group">
@@ -53,6 +54,8 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </form>
+            </form>
+            <!-- ended -->
 
 
         </div>
