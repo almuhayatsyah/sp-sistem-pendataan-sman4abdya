@@ -8,6 +8,8 @@ use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\Honeypot;
 use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
+use App\Filters\AuthFilter;
+use App\Filters\RoleFilter;
 
 class Filters extends BaseConfig
 {
@@ -24,6 +26,8 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
+        'auth'          => AuthFilter::class,
+        'role'          => RoleFilter::class,
     ];
 
     /**
@@ -34,14 +38,13 @@ class Filters extends BaseConfig
      */
     public array $globals = [
         'before' => [
-            // 'honeypot',
-            // 'csrf',
-            // 'invalidchars',
+            'csrf' => ['except' => [
+                'auth/login',
+                'auth/logout'
+            ]],
         ],
         'after' => [
             'toolbar',
-            // 'honeypot',
-            // 'secureheaders',
         ],
     ];
 
@@ -69,5 +72,30 @@ class Filters extends BaseConfig
      *
      * @var array<string, array<string, list<string>>>
      */
-    public array $filters = [];
+    public array $filters = [
+        'auth' => [
+            'before' => [
+                'dashboard',
+                'dashboard/*',
+                'guru/*',
+                'siswa/*',
+                'kelas/*',
+                'ortu/*',
+                'user/*',
+                'pengaturan/*'
+            ]
+        ],
+        'role' => [
+            'before' => [
+                'dashboard',
+                'dashboard/*',
+                'guru/*',
+                'siswa/*',
+                'kelas/*',
+                'ortu/*',
+                'user/*',
+                'pengaturan/*'
+            ]
+        ]
+    ];
 }

@@ -778,20 +778,20 @@
         },
         {
             "name": "phpoffice/phpspreadsheet",
-            "version": "2.1.8",
+            "version": "2.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
-                "reference": "8be52afdacac097057f8e165b1427cb8789dde92"
+                "reference": "f705c56e3947665389b616d21b66e59af8ebda9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/8be52afdacac097057f8e165b1427cb8789dde92",
-                "reference": "8be52afdacac097057f8e165b1427cb8789dde92",
+                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/f705c56e3947665389b616d21b66e59af8ebda9d",
+                "reference": "f705c56e3947665389b616d21b66e59af8ebda9d",
                 "shasum": ""
             },
             "require": {
-                "composer/pcre": "^3.2",
+                "composer/pcre": "^1 || ^2 || ^3",
                 "ext-ctype": "*",
                 "ext-dom": "*",
                 "ext-fileinfo": "*",
@@ -878,9 +878,9 @@
             ],
             "support": {
                 "issues": "https://github.com/PHPOffice/PhpSpreadsheet/issues",
-                "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/2.1.8"
+                "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/2.1.9"
             },
-            "time": "2025-01-26T04:51:58+00:00"
+            "time": "2025-02-08T02:58:47+00:00"
         },
         {
             "name": "psr/http-client",
