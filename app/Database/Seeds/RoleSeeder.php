@@ -10,26 +10,20 @@ class RoleSeeder extends Seeder
   {
     $data = [
       [
-        'name' => 'admin',
-        'description' => 'Administrator',
+        'name' => 'operator',
+        'description' => 'Operator/Admin Sistem',
         'created_at' => date('Y-m-d H:i:s'),
         'updated_at' => date('Y-m-d H:i:s')
       ],
       [
-        'name' => 'guru',
-        'description' => 'Guru',
+        'name' => 'kesiswaan',
+        'description' => 'Petugas Kesiswaan',
         'created_at' => date('Y-m-d H:i:s'),
         'updated_at' => date('Y-m-d H:i:s')
       ],
       [
-        'name' => 'siswa',
-        'description' => 'Siswa',
-        'created_at' => date('Y-m-d H:i:s'),
-        'updated_at' => date('Y-m-d H:i:s')
-      ],
-      [
-        'name' => 'ortu',
-        'description' => 'Orang Tua',
+        'name' => 'pengunjung',
+        'description' => 'User Eksternal (Publik)',
         'created_at' => date('Y-m-d H:i:s'),
         'updated_at' => date('Y-m-d H:i:s')
       ]

@@ -238,7 +238,7 @@ class SiswaController extends Controller
         $headers = ['No', 'NISN', 'Nama Siswa', 'Kelas', 'Jenis Kelamin', 'Status KM', 'Alamat', 'Lokasi', 'Tanggal Lahir', 'Umur', 'Nomor HP'];
         $col = 'A';
         foreach ($headers as $header) {
-            $sheet->setCellValue($col.'2', $header);
+            $sheet->setCellValue($col . '2', $header);
             $col++;
         }
         $sheet->getStyle('A2:K2')->getFont()->setBold(true);
@@ -247,17 +247,17 @@ class SiswaController extends Controller
         $row = 3;
         $no = 1;
         foreach ($siswa as $s) {
-            $sheet->setCellValue('A'.$row, $no++);
-            $sheet->setCellValue('B'.$row, $s['nisn']);
-            $sheet->setCellValue('C'.$row, $s['nama_siswa']);
-            $sheet->setCellValue('D'.$row, $s['kelas']);
-            $sheet->setCellValue('E'.$row, $s['jenis_kelamin']);
-            $sheet->setCellValue('F'.$row, $s['status_kurang_mampu'] == 1 ? 'Kurang Mampu' : 'Tidak Kurang Mampu');
-            $sheet->setCellValue('G'.$row, $s['alamat']);
-            $sheet->setCellValue('H'.$row, isset($s['nama_lokasi']) ? $s['nama_lokasi'] : 'Belum ditentukan');
-            $sheet->setCellValue('I'.$row, date('d/m/Y', strtotime($s['tanggal_lahir'])));
-            $sheet->setCellValue('J'.$row, $s['umur'].' Tahun');
-            $sheet->setCellValue('K'.$row, $s['nomor_hp']);
+            $sheet->setCellValue('A' . $row, $no++);
+            $sheet->setCellValue('B' . $row, $s['nisn']);
+            $sheet->setCellValue('C' . $row, $s['nama_siswa']);
+            $sheet->setCellValue('D' . $row, $s['kelas']);
+            $sheet->setCellValue('E' . $row, $s['jenis_kelamin']);
+            $sheet->setCellValue('F' . $row, $s['status_kurang_mampu'] == 1 ? 'Kurang Mampu' : 'Tidak Kurang Mampu');
+            $sheet->setCellValue('G' . $row, $s['alamat']);
+            $sheet->setCellValue('H' . $row, isset($s['nama_lokasi']) ? $s['nama_lokasi'] : 'Belum ditentukan');
+            $sheet->setCellValue('I' . $row, date('d/m/Y', strtotime($s['tanggal_lahir'])));
+            $sheet->setCellValue('J' . $row, $s['umur'] . ' Tahun');
+            $sheet->setCellValue('K' . $row, $s['nomor_hp']);
             $row++;
         }
         // Auto size kolom
@@ -265,7 +265,7 @@ class SiswaController extends Controller
             $sheet->getColumnDimension($col)->setAutoSize(true);
         }
         // Border untuk header dan data
-        $sheet->getStyle('A2:K'.($row-1))->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+        $sheet->getStyle('A2:K' . ($row - 1))->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
         // Output
         $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

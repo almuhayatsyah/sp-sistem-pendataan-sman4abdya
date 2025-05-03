@@ -124,29 +124,29 @@
                                 </td>
                                 <td class="text-center">
                                     <?php if ($s['foto_siswa']): ?>
-                                        <img src="<?= base_url('uploads/fotosiswa/' . $s['foto_siswa']) ?>" 
-                                             alt="Foto <?= $s['nama_siswa'] ?>" 
-                                             class="img-thumbnail foto-siswa-thumb" 
-                                             style="max-width: 50px; cursor:pointer;"
-                                             data-toggle="modal" 
-                                             data-target="#fotoModal" 
-                                             data-foto="<?= base_url('uploads/fotosiswa/' . $s['foto_siswa']) ?>">
+                                        <img src="<?= base_url('uploads/fotosiswa/' . $s['foto_siswa']) ?>"
+                                            alt="Foto <?= $s['nama_siswa'] ?>"
+                                            class="img-thumbnail foto-siswa-thumb"
+                                            style="max-width: 50px; cursor:pointer;"
+                                            data-toggle="modal"
+                                            data-target="#fotoModal"
+                                            data-foto="<?= base_url('uploads/fotosiswa/' . $s['foto_siswa']) ?>">
                                     <?php else: ?>
                                         <span class="badge badge-secondary">No Photo</span>
                                     <?php endif; ?>
                                 </td>
                                 <td class="text-center">
-                                    <a href="<?= site_url('siswa/edit/' . $s['id']) ?>" 
-                                       class="btn btn-warning btn-sm btn-circle" 
-                                       data-toggle="tooltip" 
-                                       title="Edit">
+                                    <a href="<?= site_url('siswa/edit/' . $s['id']) ?>"
+                                        class="btn btn-warning btn-sm btn-circle"
+                                        data-toggle="tooltip"
+                                        title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="#" 
-                                       class="btn btn-danger btn-sm btn-circle" 
-                                       onclick="confirmDelete('<?= $s['id'] ?>')"
-                                       data-toggle="tooltip" 
-                                       title="Hapus">
+                                    <a href="#"
+                                        class="btn btn-danger btn-sm btn-circle"
+                                        onclick="confirmDelete('<?= $s['id'] ?>')"
+                                        data-toggle="tooltip"
+                                        title="Hapus">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
@@ -182,7 +182,7 @@
                 </iframe>
             </div>
             <div class="text-muted small">
-                <i class="fas fa-info-circle"></i> 
+                <i class="fas fa-info-circle"></i>
                 Peta menampilkan lokasi tempat tinggal siswa. Nantinya akan diintegrasikan dengan koordinat GPS yang sebenarnya.
             </div>
         </div>
@@ -212,36 +212,36 @@
 
 <!-- Tambahkan modal untuk foto -->
 <div class="modal fade" id="fotoModal" tabindex="-1" role="dialog" aria-labelledby="fotoModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="fotoModalLabel">Foto Siswa</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body text-center">
-        <img src="" id="fotoModalImg" class="img-fluid" style="max-height: 400px;">
-      </div>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="fotoModalLabel">Foto Siswa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="" id="fotoModalImg" class="img-fluid" style="max-height: 400px;">
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <script>
-function confirmDelete(id) {
-    $('#deleteButton').attr('href', '<?= site_url('siswa/delete/') ?>' + id);
-    $('#deleteModal').modal('show');
-}
+    function confirmDelete(id) {
+        $('#deleteButton').attr('href', '<?= site_url('siswa/delete/') ?>' + id);
+        $('#deleteModal').modal('show');
+    }
 
-// Initialize tooltips
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-    // Modal foto siswa
-    $('.foto-siswa-thumb').on('click', function(){
-        var src = $(this).data('foto');
-        $('#fotoModalImg').attr('src', src);
+    // Initialize tooltips
+    $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+        // Modal foto siswa
+        $('.foto-siswa-thumb').on('click', function() {
+            var src = $(this).data('foto');
+            $('#fotoModalImg').attr('src', src);
+        });
     });
-});
 </script>
 
 <?= $this->endSection() ?>

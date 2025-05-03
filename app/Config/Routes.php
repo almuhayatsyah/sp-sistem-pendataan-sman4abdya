@@ -11,7 +11,7 @@ use CodeIgniter\Router\RouteCollection;
 // ========================
 
 // Halaman awal & daftar siswa
-$routes->get('/', 'SiswaController::index'); // Route default
+$routes->get('/', 'Auth::login'); // Route default diarahkan ke login
 $routes->get('/siswa', 'SiswaController::index'); // Daftar siswa
 
 // Tambah siswa
@@ -61,3 +61,23 @@ $routes->get('/kelas/delete/(:num)', 'KelasController::delete/$1');
 // Export data kelas
 $routes->get('/kelas/exportPdf', 'KelasController::exportPdf');
 $routes->get('/kelas/exportExcel', 'KelasController::exportExcel');
+
+// ========================
+// ROUTES PENGUNJUNG
+// ========================
+$routes->get('/pengunjung', 'PengunjungController::index');
+
+$routes->get('/login', 'Auth::login');
+$routes->post('/login', 'Auth::loginPost');
+
+// ========================
+// ROUTES USER (CRUD)
+// ========================
+$routes->get('/user', 'User::index');
+$routes->get('/user/create', 'User::create');
+$routes->post('/user/store', 'User::store');
+$routes->get('/user/edit/(:num)', 'User::edit/$1');
+$routes->post('/user/update/(:num)', 'User::update/$1');
+$routes->get('/user/delete/(:num)', 'User::delete/$1');
+
+$routes->setAutoRoute(true);

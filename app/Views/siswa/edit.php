@@ -8,6 +8,7 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <form action="<?= site_url('siswa/update/' . $siswa['id']) ?>" method="post" enctype="multipart/form-data">
+                <?= csrf_field() ?>
                 <div class="form-group">
                     <label for="nisn">NISN</label>
                     <input type="text" class="form-control" id="nisn" name="nisn" value="<?= $siswa['nisn'] ?>" required>
