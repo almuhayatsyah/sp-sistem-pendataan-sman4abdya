@@ -22,7 +22,9 @@ class SiswaController extends Controller
     // Menampilkan halaman form tambah siswa
     public function create()
     {
-        return view('siswa/create');
+        $kelasModel = new \App\Models\KelasModel();
+        $data['kelas'] = $kelasModel->findAll();
+        return view('siswa/create', $data);
     }
 
     // Menyimpan data siswa baru ke database
@@ -72,7 +74,7 @@ class SiswaController extends Controller
             $this->siswaModel->insert([
                 'nisn' => $this->request->getPost('nisn'),
                 'nama_siswa' => $this->request->getPost('nama_siswa'),
-                'kelas' => $this->request->getPost('kelas'),
+                'kelas_id' => $this->request->getPost('kelas_id'),
                 'tanggal_lahir' => $formattedTanggal,
                 'jenis_kelamin' => $this->request->getPost('jenis_kelamin'),
                 'alamat' => $this->request->getPost('alamat'),
@@ -98,7 +100,9 @@ class SiswaController extends Controller
     // Menampilkan halaman edit siswa
     public function edit($id)
     {
+        $kelasModel = new \App\Models\KelasModel();
         $data['siswa'] = $this->siswaModel->find($id);
+        $data['kelas'] = $kelasModel->findAll();
         return view('siswa/edit', $data);
     }
 
@@ -147,7 +151,7 @@ class SiswaController extends Controller
             $this->siswaModel->update($id, [
                 'nisn' => $this->request->getPost('nisn'),
                 'nama_siswa' => $this->request->getPost('nama_siswa'),
-                'kelas' => $this->request->getPost('kelas'),
+                'kelas_id' => $this->request->getPost('kelas_id'),
                 'tanggal_lahir' => $formattedTanggal,
                 'jenis_kelamin' => $this->request->getPost('jenis_kelamin'),
                 'alamat' => $this->request->getPost('alamat'),
@@ -189,15 +193,16 @@ class SiswaController extends Controller
     public function index()
     {
         $search = $this->request->getGet('search');
+        $builder = $this->siswaModel
+            ->select('siswa.*, kelas.nama_kelas')
+            ->join('kelas', 'kelas.id = siswa.kelas_id', 'left');
         if ($search) {
-            $siswa = $this->siswaModel
+            $builder = $builder
                 ->like('nisn', $search)
                 ->orLike('nama_siswa', $search)
-                ->orLike('kelas', $search)
-                ->paginate(10, 'siswa');
-        } else {
-            $siswa = $this->siswaModel->paginate(10, 'siswa');
+                ->orLike('kelas.nama_kelas', $search);
         }
+        $siswa = $builder->paginate(10, 'siswa');
         $data['siswa'] = $siswa;
         $data['pager'] = $this->siswaModel->pager;
         $data['search'] = $search;
@@ -209,6 +214,7 @@ class SiswaController extends Controller
     {
         $data['laporan'] = $this->siswaModel->getLaporanRekap();
         return view('siswa/laporan_siswa', $data);
+        
     }
 
     // Export data siswa ke PDF
@@ -235,7 +241,7 @@ class SiswaController extends Controller
         $sheet->getStyle('A1')->getFont()->setBold(true);
         $sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
         // Header kolom
-        $headers = ['No', 'NISN', 'Nama Siswa', 'Kelas', 'Jenis Kelamin', 'Status KM', 'Alamat', 'Lokasi', 'Tanggal Lahir', 'Umur', 'Nomor HP'];
+        $headers = ['No', 'NISN', 'Nama Siswa', 'Kelas_id', 'Jenis Kelamin', 'Status KM', 'Alamat', 'Lokasi', 'Tanggal Lahir', 'Umur', 'Nomor HP'];
         $col = 'A';
         foreach ($headers as $header) {
             $sheet->setCellValue($col . '2', $header);
@@ -250,7 +256,7 @@ class SiswaController extends Controller
             $sheet->setCellValue('A' . $row, $no++);
             $sheet->setCellValue('B' . $row, $s['nisn']);
             $sheet->setCellValue('C' . $row, $s['nama_siswa']);
-            $sheet->setCellValue('D' . $row, $s['kelas']);
+            $sheet->setCellValue('D' . $row, $s['kelas_id']);
             $sheet->setCellValue('E' . $row, $s['jenis_kelamin']);
             $sheet->setCellValue('F' . $row, $s['status_kurang_mampu'] == 1 ? 'Kurang Mampu' : 'Tidak Kurang Mampu');
             $sheet->setCellValue('G' . $row, $s['alamat']);

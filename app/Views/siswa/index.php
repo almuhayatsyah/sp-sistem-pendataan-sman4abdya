@@ -86,7 +86,7 @@
                                 <td class="text-center"><?= $no++ ?></td>
                                 <td><?= $s['nisn'] ?></td>
                                 <td><?= $s['nama_siswa'] ?></td>
-                                <td class="text-center"><?= $s['kelas'] ?></td>
+                                <td class="text-center"><?= $s['nama_kelas'] ?? '-' ?></td>
                                 <td class="text-center"><?= $s['umur'] ?> Tahun</td>
                                 <td class="text-center"><?= $s['agama'] ?></td>
                                 <td class="text-center"><?= date('d/m/Y', strtotime($s['tanggal_lahir'])) ?></td>

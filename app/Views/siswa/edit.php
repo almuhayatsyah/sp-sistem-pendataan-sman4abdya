@@ -18,8 +18,15 @@
                     <input type="text" class="form-control" id="nama_siswa" name="nama_siswa" value="<?= $siswa['nama_siswa'] ?>" required>
                 </div>
                 <div class="form-group">
-                    <label for="kelas">Kelas</label>
-                    <input type="text" class="form-control" id="kelas" name="kelas" value="<?= $siswa['kelas'] ?>" required>
+                    <label for="kelas_id">Kelas</label>
+                    <select class="form-control" id="kelas_id" name="kelas_id" required>
+                        <option value="">Pilih Kelas</option>
+                        <?php foreach ($kelas as $k): ?>
+                            <option value="<?= $k['id'] ?>" <?= ($siswa['kelas_id'] == $k['id']) ? 'selected' : '' ?>>
+                                <?= $k['nama_kelas'] ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="tanggal_lahir">Tanggal Lahir</label>

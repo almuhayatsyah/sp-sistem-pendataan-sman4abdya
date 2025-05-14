@@ -51,8 +51,8 @@ class KelasController extends Controller
         if (!$this->validate($rules)) {
             // If validation fails, return to form with errors
             return redirect()->back()
-                           ->withInput()
-                           ->with('errors', $this->validator->getErrors());
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
         }
 
         try {
@@ -67,8 +67,8 @@ class KelasController extends Controller
             // Log the error for debugging
             log_message('error', 'Error adding class: ' . $e->getMessage());
             return redirect()->back()
-                           ->withInput()
-                           ->with('error', 'Terjadi kesalahan saat menambahkan kelas. Silakan coba lagi.');
+                ->withInput()
+                ->with('error', 'Terjadi kesalahan saat menambahkan kelas. Silakan coba lagi.');
         }
     }
 
@@ -98,7 +98,7 @@ class KelasController extends Controller
     public function exportPdf()
     {
         $data['kelas'] = $this->kelasModel->findAll();
-        
+
         $dompdf = new \Dompdf\Dompdf();
         $html = view('kelas/pdf', $data);
         $dompdf->loadHtml($html);
@@ -135,4 +135,4 @@ class KelasController extends Controller
         $writer->save('php://output');
         exit();
     }
-} 
+}

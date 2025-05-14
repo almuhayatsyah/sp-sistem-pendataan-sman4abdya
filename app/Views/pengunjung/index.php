@@ -1,5 +1,5 @@
-<?= $this->extend('layout/pengunjung'); ?>
-<?= $this->section('content'); ?>
+<?php $this->extend('layout/pengunjung'); ?>
+<?php $this->section('content'); ?>
 <style>
   .table-pengunjung th,
   .table-pengunjung td {
@@ -39,6 +39,8 @@
               <th style="width:13%">Kelas</th>
               <th style="width:22%">Alamat</th>
               <th style="width:13%">Jenis Kelamin</th>
+              <th style="width:17%">Status kM</th>
+              <th style="width:20%">Foto Rumah</th>
               <th style="width:17%">LongLatitude</th>
             </tr>
           </thead>
@@ -54,9 +56,34 @@
                   <td><?= $no++ ?></td>
                   <td><?= esc($row['nisn'] ?? '-') ?></td>
                   <td><?= esc($row['nama_siswa'] ?? '-') ?></td>
-                  <td><?= esc($row['kelas'] ?? '-') ?></td>
+                  <td><?= esc($row['nama_kelas'] ?? '-') ?></td>
                   <td><?= esc($row['alamat'] ?? '-') ?></td>
                   <td><?= esc($row['jenis_kelamin'] ?? '-') ?></td>
+                  <td class="text-center">
+                    <?php if ($row['status_kurang_mampu'] == 1): ?>
+                      <span class="badge badge-warning">
+                        <i class="fas fa-user-shield"></i> Kurang Mampu
+                      </span>
+                    <?php else: ?>
+                      <span class="badge badge-info">
+                        <i class="fas fa-user-check"></i> Tidak Kurang Mampu
+                      </span>
+                    <?php endif; ?>
+                  </td>
+                  <td class="text-center">
+                    <?php if ($row['foto_siswa']): ?>
+                      <img src="<?= base_url('uploads/fotosiswa/' . $row['foto_siswa']) ?>"
+                        alt="Foto <?= $row['nama_siswa'] ?>"
+                        class="img-thumbnail foto-siswa-thumb"
+                        style="max-width: 50px; cursor:pointer;"
+                        data-toggle="modal"
+                        data-target="#fotoModal"
+                        data-foto="<?= base_url('uploads/fotosiswa/' . $row['foto_siswa']) ?>">
+                    <?php else: ?>
+                      <span class="badge badge-secondary">No Photo</span>
+                    <?php endif; ?>
+                  </td>
+
                   <td><?= rand(96, 97) . '.' . rand(100000, 999999) . ', ' . rand(4, 5) . '.' . rand(100000, 999999) ?></td>
                 </tr>
             <?php endforeach;
@@ -68,9 +95,37 @@
         <?= $pager->links('siswa', 'bootstrap_pagination') ?>
       </div>
       <div class="mb-4">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.9212491429833!2d96.8416!3d4.6434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30386a!2sSMAN%204%20Aceh%20Barat%20Daya!5e0!3m2!1sen!2sid!4v1647908453207" width="100%" height="320" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.9212491429833!2d96.8416!3d4.6434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30386a!2sSMAN%204%20Aceh%20Barat%20Daya!5e0!3m2!1sen!2sid!4v1647908453207" width="100%" height="500px" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"></iframe>
       </div>
     </div>
   </div>
 </div>
-<?= $this->endSection(); ?>
+
+<!-- d -->
+<div class="modal fade" id="fotoModal" tabindex="-1" role="dialog" aria-labelledby="fotoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="fotoModalLabel">Foto Siswa</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <img id="fotoModalImage" src="" alt="Foto Siswa" class="img-fluid">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Add this script to handle the modal image
+  document.querySelectorAll('.foto-siswa-thumb').forEach(img => {
+    img.addEventListener('click', function() {
+      const modalImage = document.getElementById('fotoModalImage');
+      modalImage.src = this.getAttribute('data-foto');
+    });
+  });
+</script>
+
+<?php $this->endSection(); ?>

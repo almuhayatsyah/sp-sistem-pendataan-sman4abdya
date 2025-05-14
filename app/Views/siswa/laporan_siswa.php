@@ -7,7 +7,7 @@
     <h1 class="h3 mb-0 text-gray-800">
       <i class="fas fa-chart-bar"></i>
       Laporan Jumlah Siswa
-    </h1> 
+    </h1>
   </div>
 
   <!-- Content Row -->
@@ -34,7 +34,7 @@
                 </tr>
               </thead>
               <tbody>
-                <?php 
+                <?php
                 $total_laki = 0;
                 $total_perempuan = 0;
                 $total_km = 0;
@@ -43,14 +43,14 @@
                 ?>
                 <?php foreach ($laporan as $data): ?>
                   <tr class="text-center">
-                    <td class="font-weight-bold"><?= $data['kelas'] ?></td>
+                    <td class="font-weight-bold"><?= $data['kelas_id'] ?? '-' ?> </td> <!-- Use 'nama_kelas' instead of 'kelas_id' -->
                     <td><?= $data['laki_laki'] ?></td>
                     <td><?= $data['perempuan'] ?></td>
                     <td><?= $data['kurang_mampu'] ?></td>
                     <td><?= $data['tidak_kurang_mampu'] ?></td>
                     <td class="font-weight-bold"><?= $data['total'] ?></td>
                   </tr>
-                  <?php 
+                  <?php
                   $total_laki += $data['laki_laki'];
                   $total_perempuan += $data['perempuan'];
                   $total_km += $data['kurang_mampu'];

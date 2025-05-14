@@ -8,7 +8,7 @@ class LogModel extends Model
 {
   protected $table = 'log';
   protected $primaryKey = 'id';
-  protected $allowedFields = ['aktivitas', 'user_id', 'waktu', 'nisn']; // Tambahkan field lain jika ada
+  protected $allowedFields = ['aktivitas', 'user_id', 'waktu', 'nisn'];
 
   public function getRecentLogs($limit = 10)
   {
@@ -16,5 +16,11 @@ class LogModel extends Model
       ->join('user', 'user.id = log.user_id', 'left')
       ->orderBy('log.waktu', 'DESC')
       ->findAll($limit);
+  }
+  public function getLogsByUser($userId)
+  {
+    return $this->where('user_id', $userId)
+      ->orderBy('waktu', 'DESC')
+      ->findAll();
   }
 }

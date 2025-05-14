@@ -14,4 +14,6 @@ class OrtuModel extends Model
     'nomor_hp',
     'gaji'
   ];
+
+  // 
 }

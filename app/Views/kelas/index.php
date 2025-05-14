@@ -14,18 +14,6 @@
                 </span>
                 <span class="text">Tambah Kelas</span>
             </a>
-            <a href="<?= site_url('kelas/exportPdf') ?>" class="btn btn-danger btn-icon-split ml-2">
-                <span class="icon text-white-50">
-                    <i class="fas fa-file-pdf"></i>
-                </span>
-                <span class="text">Download PDF</span>
-            </a>
-            <a href="<?= site_url('kelas/exportExcel') ?>" class="btn btn-success btn-icon-split ml-2">
-                <span class="icon text-white-50">
-                    <i class="fas fa-file-excel"></i>
-                </span>
-                <span class="text">Download Excel</span>
-            </a>
         </div>
     </div>
 
@@ -56,17 +44,17 @@
                                 <td><?= $k['nama_kelas'] ?></td>
                                 <td><?= $k['wali_kelas'] ?></td>
                                 <td class="text-center">
-                                    <a href="<?= site_url('kelas/edit/' . $k['id']) ?>" 
-                                       class="btn btn-warning btn-sm btn-circle"
-                                       data-toggle="tooltip"
-                                       title="Edit">
+                                    <a href="<?= site_url('kelas/edit/' . $k['id']) ?>"
+                                        class="btn btn-warning btn-sm btn-circle"
+                                        data-toggle="tooltip"
+                                        title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="#" 
-                                       class="btn btn-danger btn-sm btn-circle"
-                                       onclick="confirmDelete('<?= $k['id'] ?>')"
-                                       data-toggle="tooltip"
-                                       title="Hapus">
+                                    <a href="#"
+                                        class="btn btn-danger btn-sm btn-circle"
+                                        onclick="confirmDelete('<?= $k['id'] ?>')"
+                                        data-toggle="tooltip"
+                                        title="Hapus">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
@@ -101,15 +89,15 @@
 </div>
 
 <script>
-function confirmDelete(id) {
-    $('#deleteButton').attr('href', '<?= site_url('kelas/delete/') ?>' + id);
-    $('#deleteModal').modal('show');
-}
+    function confirmDelete(id) {
+        $('#deleteButton').attr('href', '<?= site_url('kelas/delete/') ?>' + id);
+        $('#deleteModal').modal('show');
+    }
 
-// Initialize tooltips
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-});
+    // Initialize tooltips
+    $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 </script>
 
-<?= $this->endSection() ?> 
+<?= $this->endSection() ?>

@@ -8,6 +8,7 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <form action="<?= site_url('siswa/store') ?>" method="post" enctype="multipart/form-data">
+                <?= csrf_field() ?>
                 <div class="form-group">
                     <label for="nisn">NISN</label>
                     <input type="text" class="form-control" id="nisn" name="nisn" placeholder="Masukkan NISN" required>
@@ -17,8 +18,15 @@
                     <input type="text" class="form-control" id="nama" name="nama_siswa" placeholder="Masukkan Nama" required>
                 </div>
                 <div class="form-group">
-                    <label for="kelas">Kelas</label>
-                    <input type="text" class="form-control" id="kelas" name="kelas" placeholder="Masukkan Kelas" required>
+                    <label for="kelas_id">Kelas</label>
+                    <select class="form-control" id="kelas_id" name="kelas_id" required>
+                        <option value="">Pilih Kelas</option>
+                        <?php foreach ($kelas as $k): ?>
+                            <option value="<?= $k['id'] ?>" <?= (old('kelas_id') == $k['id']) ? 'selected' : '' ?>>
+                                <?= $k['nama_kelas'] ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="tanggal_lahir">Tanggal Lahir</label>

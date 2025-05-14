@@ -84,4 +84,4 @@ class Kelas extends BaseController
         $this->kelasModel->delete($id);
         return redirect()->to('/kelas')->with('message', 'Data kelas berhasil dihapus');
     }
-} 
+}

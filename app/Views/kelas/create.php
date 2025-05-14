@@ -21,8 +21,8 @@
                 <?= csrf_field() ?>
                 <div class="form-group">
                     <label for="nama_kelas">Nama Kelas</label>
-                    <input type="text" class="form-control <?= (session('errors.nama_kelas')) ? 'is-invalid' : '' ?>" 
-                           id="nama_kelas" name="nama_kelas" value="<?= old('nama_kelas') ?>" required>
+                    <input type="text" class="form-control <?= (session('errors.nama_kelas')) ? 'is-invalid' : '' ?>"
+                        id="nama_kelas" name="nama_kelas" value="<?= old('nama_kelas') ?>" required>
                     <?php if (session('errors.nama_kelas')) : ?>
                         <div class="invalid-feedback">
                             <?= session('errors.nama_kelas') ?>
@@ -31,8 +31,8 @@
                 </div>
                 <div class="form-group">
                     <label for="wali_kelas">Wali Kelas</label>
-                    <input type="text" class="form-control <?= (session('errors.wali_kelas')) ? 'is-invalid' : '' ?>" 
-                           id="wali_kelas" name="wali_kelas" value="<?= old('wali_kelas') ?>" required>
+                    <input type="text" class="form-control <?= (session('errors.wali_kelas')) ? 'is-invalid' : '' ?>"
+                        id="wali_kelas" name="wali_kelas" value="<?= old('wali_kelas') ?>" required>
                     <?php if (session('errors.wali_kelas')) : ?>
                         <div class="invalid-feedback">
                             <?= session('errors.wali_kelas') ?>
@@ -49,4 +49,4 @@
         </div>
     </div>
 </div>
-<?= $this->endSection() ?> 
+<?= $this->endSection() ?>

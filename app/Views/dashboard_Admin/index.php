@@ -3,7 +3,7 @@
 <?= $this->section('content'); ?>
 <div class="container-fluid">
   <div class="alert alert-info font-weight-bold text-center mb-4" style="font-size:1.2rem;">
-    Selamat datang di Sistem Informasi SMAN 4 Abdya, <span class="text-primary"><?= esc(session('username')) ?></span>!
+    Selamat datang di Sistem Titik Koordinat Siswa kurang mampu SMAN 4 Abdya, <span class="text-primary"><?= esc(session('username')) ?></span>!
   </div>
   <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
   <div class="row mb-4">
@@ -25,7 +25,7 @@
           <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $total_kelas ?? 0 ?></div>
         </div>
         <div class="card-footer bg-transparent border-0 p-2 pt-0">
-          <a href="<?= base_url('kelas') ?>" class="small text-success font-weight-bold">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <a href="<?= base_url('kelas_id') ?>" class="small text-success font-weight-bold">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
     </div>
@@ -86,9 +86,6 @@
             <div class="input-group input-group-lg">
               <input type="text" class="form-control w-100" name="search" placeholder="Cari berdasarkan NISN, Nama, atau Kelas..." value="<?= $search ?? '' ?>" style="border-radius: 2rem 0 0 2rem;">
               <div class="input-group-append">
-                <button class="btn btn-primary" type="submit" style="border-radius: 0 2rem 2rem 0;">
-                  <i class="fas fa-search fa-sm"></i> Cari
-                </button>
               </div>
             </div>
           </form>

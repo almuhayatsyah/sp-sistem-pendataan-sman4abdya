@@ -15,7 +15,11 @@ class PengunjungController extends Controller
     }
 
     $siswaModel = new SiswaModel();
-    $siswaKurangMampu = $siswaModel->where('status_kurang_mampu', 1)->paginate(5, 'siswa');
+    $siswaKurangMampu = $siswaModel
+      ->select('siswa.*, kelas.nama_kelas')
+      ->join('kelas', 'kelas.id = siswa.kelas_id', 'left')
+      ->where('status_kurang_mampu', 1)
+      ->paginate(5, 'siswa');
     $pager = $siswaModel->pager;
 
     return view('pengunjung/index', [

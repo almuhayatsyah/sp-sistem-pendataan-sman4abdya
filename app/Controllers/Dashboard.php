@@ -52,12 +52,34 @@ class Dashboard extends Controller
 
     foreach ($kelas as $k) {
       $data['kelas_labels'][] = $k['nama_kelas'];
-      $data['siswa_data'][] = $this->siswaModel->where('id_kelas', $k['id'])->countAllResults();
+      $data['siswa_data'][] = $this->siswaModel->where('kelas_id', $k['id'])->countAllResults();
     }
 
     // Mengambil log aktivitas terbaru
     $data['log_aktivitas'] = $this->logModel->getRecentLogs();
 
-    return view('dashboard/index', $data);
+    return view('dashboard_Admin/index', $data);
+  }
+
+  public function delete($id)
+  {
+    $siswaModel = new \App\Models\SiswaModel();
+    $siswaTerkait = $siswaModel->where('kelas_id', $id)->countAllResults();
+    if ($siswaTerkait > 0) {
+      return redirect()->to('/kelas')->with('error', 'Kelas tidak bisa dihapus karena masih digunakan oleh data siswa.');
+    }
+    $this->kelasModel->delete($id);
+    return redirect()->to('/kelas')->with('success', 'Data kelas berhasil dihapus');
+  }
+
+  public function update($id)
+  {
+    $siswaModel = new \App\Models\SiswaModel();
+    $siswaTerkait = $siswaModel->where('kelas_id', $id)->countAllResults();
+    if ($siswaTerkait > 0) {
+      return redirect()->to('/kelas')->with('error', 'Kelas tidak bisa diubah karena masih digunakan oleh data siswa.');
+    }
+    // ...lanjutkan proses update jika tidak ada siswa terkait
+    
   }
 }

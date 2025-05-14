@@ -13,7 +13,7 @@ class SiswaModel extends Model
         'id',
         'nisn',
         'nama_siswa',
-        'kelas',
+        'kelas_id',
         'tanggal_lahir',
         'tempat_lahir',
         'jenis_kelamin',
@@ -25,7 +25,6 @@ class SiswaModel extends Model
         'foto_rumah',
         'status_kurang_mampu',
         'ortu_id',
-        'kelas_id',
         'lokasi_id'
     ];
 
@@ -34,13 +33,14 @@ class SiswaModel extends Model
 
     public function getLaporanRekap()
     {
-        return $this->select('kelas, 
+        return $this->select('kelas.nama_kelas as kelas, 
                     SUM(CASE WHEN LOWER(jenis_kelamin) = "laki-laki" THEN 1 ELSE 0 END) as laki_laki,
                     SUM(CASE WHEN LOWER(jenis_kelamin) = "perempuan" THEN 1 ELSE 0 END) as perempuan,
                     SUM(CASE WHEN status_kurang_mampu = 1 THEN 1 ELSE 0 END) as kurang_mampu,
                     SUM(CASE WHEN status_kurang_mampu = 0 THEN 1 ELSE 0 END) as tidak_kurang_mampu,
                     COUNT(*) as total')
-            ->groupBy('kelas')
+            ->join('kelas', 'kelas.id = siswa.kelas_id', 'left')
+            ->groupBy('kelas.nama_kelas')
             ->findAll();
     }
 
@@ -48,7 +48,9 @@ class SiswaModel extends Model
     // Fungsi untuk mendapatkan laporan siswa berdasarkan kelas, status kurang mampu, dan jenis kelamin ke dalam pdf
     public function getLaporanSiswa()
     {
-        return $this->select('nama_siswa, kelas, status_kurang_mampu, jenis_kelamin')
+        return $this->select('nama_siswa, kelas.nama_kelas as kelas, status_kurang_mampu, jenis_kelamin')
+            ->join('kelas', 'kelas.id = siswa.kelas_id', 'left')
+            ->groupBy('kelas.nama_kelas')
             ->findAll();
     }
 }

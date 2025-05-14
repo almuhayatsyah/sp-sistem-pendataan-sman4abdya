@@ -63,6 +63,18 @@ $routes->get('/kelas/exportPdf', 'KelasController::exportPdf');
 $routes->get('/kelas/exportExcel', 'KelasController::exportExcel');
 
 // ========================
+// ROUTES Manajemen Ortu
+// ========================
+// Halaman daftar orang tua
+$routes->get('/ortu', 'OrtuController::index'); // Daftar orang tua
+// Tambah orang tua
+$routes->get('/ortu/create', 'OrtuController::create'); // Form tambah
+$routes->post('/ortu/store', 'OrtuController::store'); // Proses simpan
+$routes->get('/ortu/edit/(:num)', 'OrtuController::edit/$1'); // Form edit
+$routes->post('/ortu/update/(:num)', 'OrtuController::update/$1'); // Proses update
+$routes->get('/ortu/delete/(:num)', 'OrtuController::delete/$1'); // Proses hapus
+
+// ========================
 // ROUTES PENGUNJUNG
 // ========================
 $routes->get('/pengunjung', 'PengunjungController::index');
@@ -79,5 +91,12 @@ $routes->post('/user/store', 'User::store');
 $routes->get('/user/edit/(:num)', 'User::edit/$1');
 $routes->post('/user/update/(:num)', 'User::update/$1');
 $routes->get('/user/delete/(:num)', 'User::delete/$1');
+
+// ========================
+// ROUTES LOG AKTIVITAS
+// ========================
+$routes->get('/pengaturan/log', 'LogController::log'); // View log page
+$routes->get('/pengaturan/log/(:any)', 'LogController::log/$1'); // View log by type
+
 
 $routes->setAutoRoute(true);
